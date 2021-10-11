@@ -21,7 +21,6 @@ export function Header() {
     sm: false,
   });
 
-  console.log(shouldShowSearchBox);
   return (
     <Flex
       as="header"

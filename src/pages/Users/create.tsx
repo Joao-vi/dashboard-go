@@ -18,7 +18,6 @@ import { Link } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { isConstructorDeclaration } from "typescript";
 
 const createUserFormSchema = yup.object().shape({
   "E-mail": yup

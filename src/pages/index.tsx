@@ -31,7 +31,6 @@ export function LoginPage() {
 
   const handleSignIn: SubmitHandler<IFormValues> = async (values) => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
-    console.log(values);
   };
   return (
     <Flex h="100vh" w="100vw" align="center" justify="center">
