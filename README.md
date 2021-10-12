@@ -14,6 +14,7 @@ Aplicação feita apartir de um curso ofertado pela RocketSeat <3
   - Melhores práticas para componentizar uma aplicação.
   - Usar a biblioteca React Hook Form para controle de formulários.
   - Melhora na noção de criação de interfaces escalaveis.
+  - Cacheando dados pelo React Query e sua importancia para UX e no auxilo de Querys
 
 ## Fotos
 
