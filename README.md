@@ -3,9 +3,9 @@
 Trata-se de uma aplicação para monitoramento de novos assinantes em uma newsletter, cadastramento de assisnantes e envio de emails em massa.
 Aplicação feita apartir de um curso ofertado pela RocketSeat <3
 
-## Tecnologias usada
+## Tecnologias usadas
 
-### `Typescript`  `React`   `React Hook Form - Yup`
+### `Typescript`  `React`   `React Hook Form - Yup` `React Query`
 ### `ChackraUi`  `React Router`  `ApexCharts`
 
 ## Aprendizados
