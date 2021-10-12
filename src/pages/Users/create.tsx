@@ -13,11 +13,14 @@ import { Sidebar } from "../../components/Sidebar";
 import { Header } from "../../components/Header/Header";
 import { Input } from "../../components/Forms/Input";
 import { RiSaveLine } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { SubmitHandler, useForm } from "react-hook-form";
+
+import { useMutation } from "react-query";
+import { api } from "../../services/api";
 
 const createUserFormSchema = yup.object().shape({
   "E-mail": yup
@@ -42,6 +45,23 @@ interface IFormValues {
 }
 
 export function CreateUser() {
+  const history = useHistory();
+  const createUser = useMutation(
+    async (user: IFormValues) => {
+      const response = await api.post("users", {
+        user: {
+          name: user["Nome completo"],
+          email: user["E-mail"],
+          created_at: new Date().toLocaleDateString(),
+        },
+      });
+    },
+    {
+      onSettled: () => {
+        history.push("/users");
+      },
+    }
+  );
   const {
     register,
     handleSubmit,
@@ -51,8 +71,7 @@ export function CreateUser() {
   });
 
   const handleCreateUserForm: SubmitHandler<IFormValues> = async (values) => {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    console.log(values);
+    await createUser.mutateAsync(values);
   };
 
   return (

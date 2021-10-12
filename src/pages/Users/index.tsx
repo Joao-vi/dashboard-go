@@ -31,6 +31,7 @@ import { useState } from "react";
 export function UserList() {
   const [page, setPage] = useState(1);
   const { data, isLoading, error, isFetching } = useUsers(page);
+  const [allTrue, setAllTrue] = useState(false);
 
   const isWideScreen = useBreakpointValue({
     base: false,
@@ -74,7 +75,10 @@ export function UserList() {
                   <Thead>
                     <Tr>
                       <Th px="6" color="gray.300" w="8">
-                        <Checkbox colorScheme="pink" />
+                        <Checkbox
+                          colorScheme="pink"
+                          onChange={() => setAllTrue((oldState) => !oldState)}
+                        />
                       </Th>
                       <Th>Usuários</Th>
                       <Th>Data de cadastro</Th>
@@ -86,7 +90,7 @@ export function UserList() {
                       return (
                         <Tr key={user.id}>
                           <Td px="6">
-                            <Checkbox colorScheme="pink" />
+                            <Checkbox colorScheme="pink" isChecked={allTrue} />
                           </Td>
                           <Td>
                             <Box>
