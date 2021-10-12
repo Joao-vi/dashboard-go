@@ -19,31 +19,18 @@ import {
 
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
 
-import { useQuery } from "react-query";
-
 import { Header } from "../../components/Header/Header";
 import { NavPagination } from "../../components/PaginationBar/NavPagination";
 import { Sidebar } from "../../components/Sidebar";
 
 import { Link } from "react-router-dom";
 import { SkeletonTable } from "../../components/Skelletons/skeletonTable";
+import { useUsers } from "../../services/hooks/useUsers";
+import { useState } from "react";
 
 export function UserList() {
-  const { data, isLoading, error } = useQuery("users", async () => {
-    const response = await fetch("http://localhost:3000/api/users");
-    const data = await response.json();
-
-    const users = data.users.map((user: any) => {
-      return {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        createdAt: new Date(user.createdAt).toLocaleDateString(),
-      };
-    });
-
-    return users;
-  });
+  const [page, setPage] = useState(1);
+  const { data, isLoading, error, isFetching } = useUsers(page);
 
   const isWideScreen = useBreakpointValue({
     base: false,
@@ -59,6 +46,7 @@ export function UserList() {
           <Flex mb="8" justify="space-between" align="center">
             <Heading size="lg" fontWeight="normal">
               Usuários
+              {!isLoading && isFetching && <Spinner size="sm" ml="2" />}
             </Heading>
             <Link to="/users/create">
               <Button
@@ -94,7 +82,7 @@ export function UserList() {
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {data.map((user: any) => {
+                    {data?.users.map((user: any) => {
                       return (
                         <Tr key={user.id}>
                           <Td px="6">
@@ -135,7 +123,11 @@ export function UserList() {
                   </Tbody>
                 </Table>
               </Box>
-              <NavPagination />
+              <NavPagination
+                totalCountOfRegisters={data?.totalCount}
+                currentPage={page}
+                onPageChange={setPage}
+              />
             </>
           )}
         </Box>

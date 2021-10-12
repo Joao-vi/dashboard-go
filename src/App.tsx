@@ -13,6 +13,8 @@ import { CreateUser } from "./pages/Users/create";
 import { SidebarDrawerProvider } from "./contexts/SidebarDrawerContext";
 import { makeServer } from "./services/mirage";
 
+import { ReactQueryDevtools } from "react-query/devtools";
+
 if (process.env.NODE_ENV === "development") {
   makeServer();
 }
@@ -40,6 +42,7 @@ function App() {
           </SidebarDrawerProvider>
         </Router>
       </ChakraProvider>
+      <ReactQueryDevtools />
     </QueryClientProvider>
   );
 }
